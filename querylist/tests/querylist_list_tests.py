@@ -3,7 +3,7 @@ import unittest2
 from querylist import QueryList
 
 class QueryListActsAsList(unittest2.TestCase):
-    """QueryList should behave as lists behave"""
+    """QueryLists should act just like lists"""
     def setUp(self):
         self.src_list = [{'foo': 1}, {'foo': 2}, {'foo': 3}]
         self.query_list = QueryList(self.src_list)
@@ -19,3 +19,9 @@ class QueryListActsAsList(unittest2.TestCase):
         dbl_query_list = self.query_list + self.query_list
 
         self.assertEqual(dbl_query_list, dbl_list)
+
+    def test_QueryList_slicing_works_like_list_slicing(self):
+        self.assertEqual(self.query_list[:2], self.src_list[:2])
+
+    def test_QueryList_indexing_works_like_list_indexing(self):
+        self.assertEqual(self.query_list[1], self.src_list[1])
