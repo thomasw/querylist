@@ -2,6 +2,7 @@ import unittest2
 
 from querylist import QueryList
 
+
 class QueryListActsAsList(unittest2.TestCase):
     """QueryLists should act just like lists"""
     def setUp(self):
