@@ -16,10 +16,6 @@ class BetterDict(dict):
         return super(BetterDict, self).__init__(*args, **kwargs)
 
     def __getattr__(self, attr):
-        # Don't attempt lookups for things that conflict with dict attrs
-        if attr in self.__dict_attrs:
-            raise AttributeError
-
         # If the requested attribute is prefixed with self.__prefix,
         # we need to unprefix it and do a lookup for that key.
         if attr.startswith(self.__prefix) and attr != self.__prefix:
