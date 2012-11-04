@@ -1,4 +1,2 @@
-reports/
-
 # This should probably be in your global ignore, but just incase...
 *.pyc
