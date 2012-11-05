@@ -1,31 +1,5 @@
-# Attribute prefix for allowing dotlookups when keys conflict with dict
-# attributes.
-PREFIX = '_bd_'
-
-
 class BetterDict(dict):
-    def __init__(self, *args, **kwargs):
-        # Prefix that will be appended to keys for dot lookups that would
-        # otherwise conflict with dict attributes.
-        self.__prefix = PREFIX
-
-        # Determine the attributes a dictionary has. We use this to prevent
-        # exposing properties that conflict with a dict's properties
-        self.__dict_attrs = dir(dict)
-
-        return super(BetterDict, self).__init__(*args, **kwargs)
-
     def __getattr__(self, attr):
-        # If the requested attribute is prefixed with self.__prefix,
-        # we need to unprefix it and do a lookup for that key.
-        if attr.startswith(self.__prefix) and attr != self.__prefix:
-            unprefixed_attr = attr.partition(self.__prefix)[-1]
-
-            if unprefixed_attr in self and (
-                    unprefixed_attr in self.__dict_attrs or
-                    unprefixed_attr.startswith(self.__prefix)):
-                return self.__dict_to_BetterDict(self[unprefixed_attr])
-
         if attr in self:
             return self.__dict_to_BetterDict(self[attr])
 
@@ -34,3 +8,22 @@ class BetterDict(dict):
     def __dict_to_BetterDict(self, value):
         """Convert the passed value to a BetterDict if the value is a dict"""
         return BetterDict(value) if type(value) == dict else value
+
+    @property
+    def _bd_(self):
+        """Property that allows dot lookups of otherwise hidden attributes."""
+        if not getattr(self, '__bd__', False):
+            self.__bd = BetterDictLookUp(self)
+
+        return self.__bd
+
+
+class BetterDictLookUp(object):
+    def __init__(self, lookup_dict):
+        self._lookup_dict = lookup_dict
+
+    def __getattr__(self, attr):
+        try:
+            return self._lookup_dict[attr]
+        except KeyError:
+            raise AttributeError
