@@ -24,12 +24,14 @@ SRC_DICT = {
 }
 
 
-class BetterDictsDotLookups(unittest2.TestCase):
-    """BetterDict dot lookups"""
+class BetterDictTestCase(unittest2.TestCase):
     def setUp(self):
         self.src_dict = deepcopy(SRC_DICT)
         self.better_dict = BetterDict(self.src_dict)
 
+
+class BetterDictsDotLookups(BetterDictTestCase):
+    """BetterDict dot lookups"""
     def test_can_be_used_to_retrieve_dict_keys(self):
         self.assertEqual(self.better_dict.foo, self.src_dict['foo'])
 
@@ -43,24 +45,16 @@ class BetterDictsDotLookups(unittest2.TestCase):
         self.assertEqual(self.better_dict._bd_._bd_, self.src_dict['_bd_'])
 
 
-class BetterDictDictAttributes(unittest2.TestCase):
+class BetterDictDictAttributes(BetterDictTestCase):
     """BetterDict dict attributes"""
-    def setUp(self):
-        self.src_dict = deepcopy(SRC_DICT)
-        self.better_dict = BetterDict(self.src_dict)
-
     def test_are_converted_to_BetterDicts(self):
         self.assertEqual(
             self.better_dict.bar.another.d,
             self.src_dict['bar']['another']['d'])
 
 
-class BetterDictDotAssignment(unittest2.TestCase):
+class BetterDictDotAssignment(BetterDictTestCase):
     """BetterDict dot assignment"""
-    def setUp(self):
-        self.src_dict = deepcopy(SRC_DICT)
-        self.better_dict = BetterDict(self.src_dict)
-
     def test_updates_the_key_corresponding_to_the_attribute_used(self):
         self.better_dict.foo = 2
         self.assertEqual(self.better_dict['foo'], 2)
@@ -87,3 +81,18 @@ class BetterDictDotAssignment(unittest2.TestCase):
         self.better_dict.bar.a = 'done!'
         self.assertEqual(self.better_dict.bar.a, 'done!')
         self.assertEqual(self.better_dict['bar']['a'], 'done!')
+
+
+class BetterDictDirList(BetterDictTestCase):
+    "BetterDict dir() list"
+    def test_contains_the_BetterDicts_keys(self):
+        for key in self.src_dict.keys():
+            self.assertIn(key, dir(self.better_dict))
+
+    def test_contains_standard_dict_attrs(self):
+        for dict_attr in dir(dict):
+            self.assertIn(dict_attr, dir(self.better_dict))
+
+    def test_conatins__bd_(self):
+        """contains the attr named '_bd_'"""
+        self.assertIn('_bd_', dir(self.better_dict))

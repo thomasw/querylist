@@ -14,6 +14,15 @@ class BetterDict(dict):
 
         return self[attr]
 
+    def __setattr__(self, attr, value):
+        """Write dot assignments to dict keys."""
+        self[attr] = value
+
+    def __dir__(self):
+        current_attrs = dir(dict)
+        current_attrs.extend(self.keys())
+        return current_attrs
+
     @property
     def _bd_(self):
         """Property that allows dot lookups of otherwise hidden attributes."""
@@ -21,10 +30,6 @@ class BetterDict(dict):
             self.__bd = BetterDictLookUp(self)
 
         return self.__bd
-
-    def __setattr__(self, attr, value):
-        """Write dot assignments to dict keys."""
-        self[attr] = value
 
 
 class BetterDictLookUp(object):
