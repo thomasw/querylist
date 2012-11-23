@@ -4,7 +4,8 @@ from querylist import QueryList
 
 
 class QueryListActsAsList(unittest2.TestCase):
-    """QueryLists should act just like lists"""
+    """QueryLists should act just like lists if the wrapper is compatible
+    with the src data elements"""
     def setUp(self):
         self.src_list = [{'foo': 1}, {'foo': 2}, {'foo': 3}]
         self.query_list = QueryList(self.src_list)
