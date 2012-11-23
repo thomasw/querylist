@@ -13,6 +13,10 @@ class QueryList(list):
         super(QueryList, self).__init__(converted_data)
 
     def _convert_iterable(self, iterable):
+        """Converts elements returned by an iterable into instances of
+        self._wrapper
+
+        """
         # Return original if _wrapper isn't callable
         if not callable(self._wrapper):
             return iterable
