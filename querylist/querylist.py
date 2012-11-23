@@ -8,7 +8,6 @@ class QueryList(list):
         self.src_data = data
 
         # Wrap our src_data with wrapper
-        print data
         converted_data = self._convert_iterable(data) if data else []
 
         super(QueryList, self).__init__(converted_data)
