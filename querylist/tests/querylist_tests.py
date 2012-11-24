@@ -19,6 +19,9 @@ class QueryListInstantiationTests(unittest2.TestCase):
     def test_converts_src_data_members_to_wrapper_type(self):
         self.assertEqual(QueryList([1, 2, 3], str), ['1', '2', '3'])
 
+    def test_with_wrap_disabled_doesnt_touch_member_objects(self):
+        self.assertEqual(QueryList([1, 2, 3], str, False), [1, 2, 3])
+
 
 class QueryListConverIterableTests(unittest2.TestCase):
     """QueryList._convert_iterable()"""
@@ -57,6 +60,12 @@ class QueryListMethodTests(unittest2.TestCase):
         self.ql = QueryList(SITE_LIST)
 
 
+class QueryListCountPropertyTests(QueryListMethodTests):
+    "QueryList.count"
+    def test_returns_how_many_objects_are_in_the_querylist(self):
+        self.assertEqual(self.ql.count, len(self.src_list))
+
+
 class QueryListGetMethodTests(QueryListMethodTests):
     """QueryList.get()"""
     def test_returns_first_encountered_match(self):
@@ -74,3 +83,21 @@ class QueryListGetMethodTests(QueryListMethodTests):
     def test_works_correctly_with_relational_lookups(self):
         self.assertEqual(
             self.ql.get(meta__keywords=['Catsup', 'dogs']), self.src_list[1])
+
+
+class QueryListExcludeMethodTests(QueryListMethodTests):
+    """QueryList.exclude()"""
+    def test_excludes_the_matching_set_of_elements(self):
+        self.assertEqual(self.ql.exclude(published=True), [self.src_list[2]])
+
+    def test_returns_an_empty_querylist_if_no_items_match(self):
+        self.assertFalse(self.ql.exclude(meta__description='My cool site'))
+
+
+class QueryListLimitMethodTests(QueryListMethodTests):
+    """QueryList.limit()"""
+    def test_returns_subset_of_matching_elements(self):
+        self.assertEqual(self.ql.limit(published=False), [self.src_list[2]])
+
+    def test_returns_an_empty_querylist_if_no_items_match(self):
+        self.assertFalse(self.ql.limit(id=1000))

@@ -3,15 +3,21 @@ from fieldlookup import field_lookup
 
 
 class QueryList(list):
-    def __init__(self, data=None, wrapper=BetterDict):
+    def __init__(self, data=None, wrapper=BetterDict, wrap=True):
         """Create a QueryList from an iterable and a wrapper object."""
         self._wrapper = wrapper
         self.src_data = data
+        converted_data = data or []
 
         # Wrap our src_data with wrapper
-        converted_data = self._convert_iterable(data) if data else []
+        if wrap:
+            converted_data = self._convert_iterable(data) if data else []
 
         super(QueryList, self).__init__(converted_data)
+
+    @property
+    def count(self):
+        return len(self)
 
     def _convert_iterable(self, iterable):
         """Converts elements returned by an iterable into instances of
@@ -47,6 +53,24 @@ class QueryList(list):
                 return x
 
         raise NotFound("Element with specified attributes not found.")
+
+    def exclude(self, **kwargs):
+        """Returns a new QueryList containing the subset of objects from
+        this QueryList that do not match the provided lookup parameters.
+
+        """
+        return QueryList(
+            data=(x for x in self if not self._check_element(kwargs, x)),
+            wrapper=self._wrapper, wrap=False)
+
+    def limit(self, **kwargs):
+        """Returns a new QueryList containing the subset of objects from this
+        QueryList that match the provided lookup parameters
+
+        """
+        return QueryList(
+            data=(x for x in self if self._check_element(kwargs, x)),
+            wrapper=self._wrapper, wrap=False)
 
 
 class NotFound(Exception):
