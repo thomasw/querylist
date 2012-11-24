@@ -1,7 +1,7 @@
 import unittest2
 
 from querylist import BetterDict
-from querylist.fieldlookup import FieldLookup
+from querylist.fieldlookup import FieldLookup, field_lookup
 
 
 class FieldLookupTests(unittest2.TestCase):
@@ -22,7 +22,7 @@ class FieldLookupTests(unittest2.TestCase):
 
 
 class FieldLookupParseLookupTests(FieldLookupTests):
-    """FieldLookups._parse_lookup_string"""
+    """FieldLookups._parse_lookup_string()"""
     def test_returns_single_value_list_for_simple_lookups(self):
         self.assertEquals(self.fl._parse_lookup_string('yay')[0], ['yay'])
 
@@ -40,7 +40,7 @@ class FieldLookupParseLookupTests(FieldLookupTests):
 
 
 class FiedLookupResolveLookupChainTests(FieldLookupTests):
-    """FieldLookup._resolve_lookup_chain"""
+    """FieldLookup._resolve_lookup_chain()"""
     def test_returns_the_correct_value_for_simple_lookup_chains(self):
         self.assertEquals(
             self.fl._resolve_lookup_chain(['foo'], self.instance), 1)
@@ -53,16 +53,17 @@ class FiedLookupResolveLookupChainTests(FieldLookupTests):
 
 
 class FieldLookupCallTests(FieldLookupTests):
-    """FieldLookup()"""
+    """field_lookup()"""
     def test_returns_looked_up_value_when_passed_a_lookup_and_instance(self):
         self.assertEqual(
-            self.fl(self.instance, 'bar__meh__bleh'), [1, 2])
+            field_lookup(self.instance, 'bar__meh__bleh'), [1, 2])
 
     def test_returns_comparison_result_when_compare_is_set_to_true(self):
         self.assertEqual(
-            self.fl(self.instance, 'foo', 1, True), True
-        )
+            field_lookup(self.instance, 'foo', 1, True), True)
 
     def test_compares_based_on_comparator_specified_in_lookup_string(self):
         self.assertEqual(
-            self.fl(self.instance, 'sauce__iexact', 'mustard', True), True)
+            field_lookup(self.instance, 'sauce__iexact', 'mustard', True),
+            True
+        )

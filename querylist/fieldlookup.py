@@ -58,3 +58,6 @@ class FieldLookup(object):
     def _iexact(value1, value2):
         """Convert two values to lowercase and compare them."""
         return value1.lower() == value2.lower()
+
+
+field_lookup = FieldLookup()
