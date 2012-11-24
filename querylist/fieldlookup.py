@@ -1,9 +1,25 @@
+import re
+
+
 class FieldLookup(object):
     def __init__(self):
-        self.default_comparator = FieldLookup._exact
+        self.default_comparator = FieldLookup.exact
         self.comparators = {
-            'exact': FieldLookup._exact,
-            'iexact': FieldLookup._iexact,
+            'exact': FieldLookup.exact,
+            'iexact': FieldLookup.iexact,
+            'contains': FieldLookup.contains,
+            'icontains': FieldLookup.icontains,
+            'in': FieldLookup.isin,
+            'startswith': FieldLookup.startswith,
+            'istartswith': FieldLookup.istartswith,
+            'endswith': FieldLookup.endswith,
+            'iendswith': FieldLookup.iendswith,
+            'regex': FieldLookup.regex,
+            'iregex': FieldLookup.iregex,
+            'gt': FieldLookup.gt,
+            'gte': FieldLookup.gte,
+            'lt': FieldLookup.lt,
+            'lte': FieldLookup.lte,
         }
 
     def __call__(self, instance, lookup, compare_value=None, compare=False):
@@ -50,14 +66,110 @@ class FieldLookup(object):
         return value
 
     @staticmethod
-    def _exact(value1, value2):
+    def exact(value1, value2):
         """Compare two values."""
         return value1 == value2
 
     @staticmethod
-    def _iexact(value1, value2):
-        """Convert two values to lowercase and compare them."""
+    def iexact(value1, value2):
+        """Convert two values to lowercase and compare them.
+
+        This method requires strings.
+
+        """
         return value1.lower() == value2.lower()
+
+    @staticmethod
+    def contains(value1, value2):
+        """Return true if the first value contains the second value."""
+        return value2 in value1
+
+    @staticmethod
+    def icontains(value1, value2):
+        """Returns true if the lowercase version of the first value contains
+        the lowercase version of the second value.
+
+        This method requires strings.
+
+        """
+        return value2.lower() in value1.lower()
+
+    @staticmethod
+    def isin(value1, value2):
+        """Returns true if the second value contains the first value."""
+        return value1 in value2
+
+    @staticmethod
+    def startswith(value1, value2):
+        """Returns true if the first value starts with the second.
+
+        This method requires strings.
+
+        """
+        return value1.startswith(value2)
+
+    @staticmethod
+    def istartswith(value1, value2):
+        """Returns true if the lowercased first value starts with the
+        lowercased second value.
+
+        This method requires strings.
+
+        """
+        return value1.lower().startswith(value2.lower())
+
+    @staticmethod
+    def endswith(value1, value2):
+        """Returns true if the first value ends with the second value."""
+        return value1.endswith(value2)
+
+    @staticmethod
+    def iendswith(value1, value2):
+        """Returns true if the lowercased first value ends with the lowercased
+        second value.
+
+        This method requires strings.
+        """
+        return value1.lower().endswith(value2.lower())
+
+    @staticmethod
+    def regex(value, regex):
+        """Returns True if the value matches against the regex."""
+        return re.match(regex, value)
+
+    @staticmethod
+    def iregex(value, iregex):
+        """Returns true if the value case insentively matches agains the
+        regex.
+
+        """
+        return re.match(iregex, value, flags=re.I)
+
+    @staticmethod
+    def gt(value1, value2):
+        """Returns true if the first value is greater than the second."""
+        return value1 > value2
+
+    @staticmethod
+    def gte(value1, value2):
+        """Returns ture if the first value is greater than or equal to the
+        second.
+
+        """
+        return value1 >= value2
+
+    @staticmethod
+    def lt(value1, value2):
+        """Returns true if first value is less than the second."""
+        return value1 < value2
+
+    @staticmethod
+    def lte(value1, value2):
+        """Returns true if the first value is less than or equal to the
+        second.
+
+        """
+        return value1 <= value2
 
 
 field_lookup = FieldLookup()

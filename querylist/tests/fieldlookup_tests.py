@@ -32,11 +32,11 @@ class FieldLookupParseLookupTests(FieldLookupTests):
 
     def test_defaults_to_exact_for_the_lookup_method(self):
         self.assertEquals(
-            self.fl._parse_lookup_string('yay')[1], self.fl._exact)
+            self.fl._parse_lookup_string('yay')[1], self.fl.exact)
 
     def test_correctly_determines_the_lookup_method_if_not_the_default(self):
         self.assertEquals(
-            self.fl._parse_lookup_string('yay__iexact')[1], self.fl._iexact)
+            self.fl._parse_lookup_string('yay__iexact')[1], self.fl.iexact)
 
 
 class FiedLookupResolveLookupChainTests(FieldLookupTests):
