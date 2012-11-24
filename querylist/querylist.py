@@ -1,4 +1,5 @@
 from betterdict import BetterDict
+from fieldlookup import field_lookup
 
 
 class QueryList(list):
@@ -22,3 +23,31 @@ class QueryList(list):
             return iterable
 
         return [self._wrapper(x) for x in iterable]
+
+    def _check_element(self, lookup_strings, instance):
+        """Return True if lookup string/value pairs match against the passed
+        object.
+
+        """
+        for q, val in lookup_strings.iteritems():
+            if not field_lookup(instance, q, val, True):
+                return False
+
+        return True
+
+    def get(self, **kwargs):
+        """Returns the first object encountered that matches the specified
+        lookup parameters.
+
+        Raises NotFound if no matching object is found.
+
+        """
+        for x in self:
+            if self._check_element(kwargs, x):
+                return x
+
+        raise NotFound("Element with specified attributes not found.")
+
+
+class NotFound(Exception):
+    pass

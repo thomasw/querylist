@@ -1,6 +1,8 @@
 import unittest2
 
+from fixtures import SITE_LIST
 from querylist import QueryList, BetterDict
+from querylist.querylist import NotFound
 
 
 class QueryListInstantiationTests(unittest2.TestCase):
@@ -19,7 +21,7 @@ class QueryListInstantiationTests(unittest2.TestCase):
 
 
 class QueryListConverIterableTests(unittest2.TestCase):
-    """QueryList _convert_iterable"""
+    """QueryList._convert_iterable()"""
     def setUp(self):
         self.iterable = [{'foo': 1}, {'bar': 2}]
         self.ql = QueryList()
@@ -28,6 +30,47 @@ class QueryListConverIterableTests(unittest2.TestCase):
         converted = self.ql._convert_iterable(self.iterable)
         self.assertEqual(converted[0], BetterDict(self.iterable[0]))
 
-    def test_doesnt_convert_an_iterable_when_wrapper_attr_is_None(self):
+    def test_doesnt_convert_passed_iterable_when_wrapper_attr_is_None(self):
         ql = QueryList(wrapper=None)
         self.assertEqual(ql._convert_iterable(self.iterable), self.iterable)
+
+
+class QueryListCheckElementTests(unittest2.TestCase):
+    "QueryList._check_element()"
+    def setUp(self):
+        self.ql = QueryList()
+        self.bd = BetterDict({'id': 1, 'dog': 4})
+
+    def test_returns_true_if_instance_matches_lookup_value_pairs(self):
+        self.assertTrue(self.ql._check_element({'id': 1}, self.bd))
+
+    def test_returns_false_if_instance_doesnt_match_lookup_value_pairs(self):
+        self.assertFalse(self.ql._check_element({'id': 2}, self.bd))
+
+    def test_handles_multiple_lookup_value_pairs_correctly(self):
+        self.assertTrue(self.ql._check_element({'id': 1, 'dog': 4}, self.bd))
+
+
+class QueryListMethodTests(unittest2.TestCase):
+    def setUp(self):
+        self.src_list = SITE_LIST
+        self.ql = QueryList(SITE_LIST)
+
+
+class QueryListGetMethodTests(QueryListMethodTests):
+    """QueryList.get()"""
+    def test_returns_first_encountered_match(self):
+        self.assertEqual(self.ql.get(id=2), self.src_list[1])
+
+    def test_raises_an_exception_if_no_matches_are_found(self):
+        self.assertRaises(NotFound, self.ql.get, url='github.com')
+
+    def test_works_correctly_with_multiple_lookups(self):
+        self.assertEqual(
+            self.ql.get(id=3, name__iexact="site 3", published=False),
+            self.src_list[2]
+        )
+
+    def test_works_correctly_with_relational_lookups(self):
+        self.assertEqual(
+            self.ql.get(meta__keywords=['Catsup', 'dogs']), self.src_list[1])
