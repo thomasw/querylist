@@ -25,7 +25,7 @@ class FieldLookup(object):
         return comparator(value, compare_value)
 
     def _parse_lookup_string(self, lookup_chain):
-        """Convert a lookup string to a lookup_chain, lookup method tuple."""
+        """Convert a lookup string to a (lookup_chain, comparator) tuple."""
         lookup_chain = lookup_chain.split('__')
         comparator = self.default_comparator
 
