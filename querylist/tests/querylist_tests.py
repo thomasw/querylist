@@ -82,7 +82,7 @@ class QueryListGetMethodTests(QueryListMethodTests):
 
     def test_works_correctly_with_relational_lookups(self):
         self.assertEqual(
-            self.ql.get(meta__keywords=['Catsup', 'dogs']), self.src_list[1])
+            self.ql.get(meta__keywords__contains='Catsup'), self.src_list[1])
 
 
 class QueryListExcludeMethodTests(QueryListMethodTests):
@@ -91,7 +91,8 @@ class QueryListExcludeMethodTests(QueryListMethodTests):
         self.assertEqual(self.ql.exclude(published=True), [self.src_list[2]])
 
     def test_returns_an_empty_querylist_if_no_items_match(self):
-        self.assertFalse(self.ql.exclude(meta__description='My cool site'))
+        self.assertFalse(
+            self.ql.exclude(meta__description__icontains='cool site'))
 
 
 class QueryListLimitMethodTests(QueryListMethodTests):
