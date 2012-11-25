@@ -71,6 +71,9 @@ class QueryListGetMethodTests(QueryListMethodTests):
     def test_returns_first_encountered_match(self):
         self.assertEqual(self.ql.get(id=2), self.src_list[1])
 
+    def test_returns_first_element_when_not_passed_anything(self):
+        self.assertEqual(self.ql.get(), self.src_list[0])
+
     def test_raises_an_exception_if_no_matches_are_found(self):
         self.assertRaises(NotFound, self.ql.get, url='github.com')
 
@@ -87,16 +90,22 @@ class QueryListGetMethodTests(QueryListMethodTests):
 
 class QueryListExcludeMethodTests(QueryListMethodTests):
     """QueryList.exclude()"""
+    def test_excludes_all_if_passed_nothing(self):
+        self.assertEqual(self.ql.exclude(), [])
+
     def test_excludes_the_matching_set_of_elements(self):
         self.assertEqual(self.ql.exclude(published=True), [self.src_list[2]])
 
-    def test_returns_an_empty_querylist_if_no_items_match(self):
+    def test_returns_an_empty_querylist_if_all_items_match(self):
         self.assertFalse(
             self.ql.exclude(meta__description__icontains='cool site'))
 
 
 class QueryListLimitMethodTests(QueryListMethodTests):
     """QueryList.limit()"""
+    def test_returns_everything_if_it_is_passed_nothing(self):
+        self.assertEqual(self.ql.limit(), self.src_list)
+
     def test_returns_subset_of_matching_elements(self):
         self.assertEqual(self.ql.limit(published=False), [self.src_list[2]])
 
