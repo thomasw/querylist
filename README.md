@@ -61,7 +61,7 @@ Key values that conflict with normal dict attributes are accessible via a
 
 QueryLists work just like lists:
 
-    >>> from querylist.tests.fixtures import SITE_LIST
+    >>> from querylist import QueryList
     >>> site_list = [
         {
             'url': 'http://site1.tld/',
