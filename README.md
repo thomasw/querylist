@@ -1,4 +1,4 @@
-# querylist
+# querylist [![Build Status](https://travis-ci.org/thomasw/querylist.png)](https://travis-ci.org/thomasw/querylist)
 
 
 ## Installation
