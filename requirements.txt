@@ -5,3 +5,9 @@ pinocchio==0.3.1
 pyflakes==0.5.0
 unittest2==0.5.1
 testtube==0.0.1
+
+# Documentation requirements.
+Pygments==1.5
+Jinja2==2.6
+docutils==0.9.1
+Sphinx==1.1.3
