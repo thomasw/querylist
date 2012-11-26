@@ -93,8 +93,27 @@ class QueryList(list):
         raise NotFound("Element with specified attributes not found.")
 
     def exclude(self, **kwargs):
-        """Returns a new QueryList containing the subset of objects from
-        this QueryList that do not match the provided lookup parameters.
+        """Generates a QueryList containing the subset of objects from
+        this QueryList that do **not** match the provided field lookups.
+
+        The following example returns the subset of a QueryList named
+        ``site_list`` where the id is greather than 1000.
+
+        >>> site_list.exclude(id__gt=1000)
+        [{'url': 'http://site1001.tld/',...}, {...}],
+
+        In the next example, ``exclude()`` returns the subset of objects
+        from site_list that aren't published and don't have "test" in their
+        title
+
+        >>> site_list.exclude(published=True, title__icontains="test")
+        [{'url': 'http://site1.tld/',...}, {...}]
+
+        If all objects match the provided field lookups, then an empty
+        QueryList is returned:
+
+        >>> site_list.exclude(id__gt=0)
+        []
 
         """
         return QueryList(
@@ -102,8 +121,27 @@ class QueryList(list):
             wrapper=self._wrapper, wrap=False)
 
     def limit(self, **kwargs):
-        """Returns a new QueryList containing the subset of objects from this
-        QueryList that match the provided lookup parameters
+        """Generates a QueryList containing the subset of objects from this
+        QueryList that match the provided set of field lookups.
+
+        The following example returns the subset of a QueryList named
+        ``site_list`` where published is equal to False:
+
+        >>> site_list.limit(published=True)
+        [{'url': 'http://site1.tld/',...}, {...}],
+
+        Similarly, in the next example, ``limit()`` returns the subset of
+        objects where object.meta.keywords contains the string 'kittens' and
+        where the id property is greater than 100.
+
+        >>> site_list.limit(meta__keywords__contains='kittens', id__gt=100)
+        [{'url': 'http://site101.tld/',...}, {...}],
+
+        If no objects match the provided field lookups, an empty QueryList
+        is returned.
+
+        >>> site_list.limit(id__gte=1000, published=False)
+        []
 
         """
         return QueryList(
