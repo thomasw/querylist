@@ -1,7 +1,7 @@
 Installation
 ============
 
-You can install querylist like you'd install any other python package:
+You can install querylist like you'd install any other python package::
 
     $ pip install querylist
 
