@@ -14,7 +14,7 @@ dictionaries that enables dot lookups and assignment for key values.
 
 ## Installation
 
-Install Querylist like you'd install any other Python package:
+Querylist can be installed like any other python package:
 
     > pip install querylist
 
@@ -24,8 +24,8 @@ Querylist is tested against Python >2.5, <3.0.
 
 ### BetterDicts
 
-BetterDicts wrap normal dicts. They have all of the same functionality you'd
-expect from a normal dict:
+BetterDicts wrap normal dicts. They have all of the same functionality one
+would expect from a normal dict:
 
     >>> from querylist import BetterDict
     >>> src = {'foo': 'bar', 'items': True}
@@ -96,15 +96,17 @@ QueryLists work just like lists:
     >>> ql == site_list
     True
 
-They also let you, exclude objects that don't match criteria via field lookups
-or limit the QueryList to only the objects that do match a provided criteria:
+They also let developers, exclude objects that don't match criteria via field
+lookups or limit the QueryList to only the objects that do match a provided
+criteria:
 
     >>> ql.exclude(published=True)
     [{'url': 'http://site3.tld/', 'meta': {'keywords': ['Mustard', 'kittens'], 'description': 'My cool site'}, 'id': 3, 'name': 'Site 3', 'published': False}]
     >>> ql.limit(published=True).exclude(meta__keywords__contains='Catsup')
     [{'url': 'http://site1.tld/', 'meta': {'keywords': ['Mustard', 'kittens'], 'description': 'My cool site'}, 'id': 1, 'name': 'Site 1', 'published': True}]
 
-And finally, they let you retrieve specific objects with the get method:
+And finally, they let developers retrieve specific objects with the get
+method:
 
     >>> ql.get(id=2)
     {'url': 'http://site1.tld/', 'meta': {'keywords': ['Mustard', 'kittens'], 'description': 'My cool site'}, 'id': 1, 'name': 'Site 1', 'published': True}
@@ -130,7 +132,7 @@ the following, which publishes all unpublished sites:
 3. Use [testtube](https://github.com/thomasw/testtube/)'s `stir` command
 (installed via #2) to monitor the project directory for changes and
 automatically run the test suite.
-4. Make your changes and submit a pull request.
+4. Make changes and submit a pull request.
 
 At the moment, Querylist has great test coverage. Please do your part to help
 keep it that way by writing tests whenever you add or change code.

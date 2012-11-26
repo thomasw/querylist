@@ -1,12 +1,12 @@
 Installation
 ============
 
-You can install querylist like you'd install any other python package::
+Querylist can be installed like any other python package::
 
     $ pip install querylist
 
-Once installed, you can import both QueryList and BetterDict directly from
-the querylist module and use them to your heart's content.
+Once installed, both QueryList and BetterDict can be imported directly from
+the querylist module.
 
     >>> from querylist import BetterDict, QueryList
 

@@ -13,7 +13,7 @@ class QueryList(list):
 
     Keywrod arguments:
 
-    * data -- an iterable reprsenting the data that you would like to query.
+    * data -- an iterable reprsenting the data that to be to queried.
     * wrapper -- a callable that can convert data's elements to objects that
       are compatbile with QueryList
     * wrap -- Boolean toggle to indicate whether or not to call wrapper on

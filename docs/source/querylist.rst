@@ -106,7 +106,7 @@ Properties of properties
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Field lookups can extend to properties of properties (and so on). Simply
-replace the dot operator that you'd normally use with a double underscore.
+replace the dot operator that one would normally use with a double underscore.
 ``meta__description="Cats"``, for example, would match against all objects in
 the QueryList where object.meta.description=="Cats."
 
