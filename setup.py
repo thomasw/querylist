@@ -25,7 +25,7 @@ setup(
     tests_require=["nose==1.2.1", "pinocchio==0.3.1", unittest2_module],
     classifiers=[
         'Development Status :: 4 - Beta',
-        'Intended Audience :: Developers'
+        'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Topic :: Software Development :: Libraries',
     ],
