@@ -3,6 +3,24 @@ from fieldlookup import field_lookup
 
 
 class QueryList(list):
+    """A QueryList is an extension of Python's built in list data structure
+    that adds easy filtering, excluding, and retrieval of member objects.
+
+    >>> from querylist import QueryList
+    >>> sites = QueryList(get_sites())
+    >>> sites.exclude(published=True)
+    [{'url': 'http://site3.tld/', 'published': False}]
+
+    Keywrod arguments:
+
+    * data -- an iterable reprsenting the data that you would like to query.
+    * wrapper -- a callable that can convert data's elements to objects that
+      are compatbile with QueryList
+    * wrap -- Boolean toggle to indicate whether or not to call wrapper on
+      each element in data on instantiation. Set to false if data's elements
+      are already compatible with QueryList.
+
+    """
     def __init__(self, data=None, wrapper=BetterDict, wrap=True):
         """Create a QueryList from an iterable and a wrapper object."""
         self._wrapper = wrapper
@@ -17,6 +35,7 @@ class QueryList(list):
 
     @property
     def count(self):
+        """Returns the nubmer of objects in the QueryList."""
         return len(self)
 
     def _convert_iterable(self, iterable):
@@ -45,7 +64,26 @@ class QueryList(list):
         """Returns the first object encountered that matches the specified
         lookup parameters.
 
-        Raises NotFound if no matching object is found.
+        >>> site_list.get(id=1)
+        {'url': 'http://site1.tld/', 'published': False, 'id': 1}
+        >>> site_list.get(published=True, id__lt=3)
+        {'url': 'http://site1.tld/', 'published': True, 'id': 2}
+        >>> site_list.limit(published=True).get(id__lt=3)
+        {'url': 'http://site1.tld/', 'published': True, 'id': 2}
+
+        If the QueryList contains multiple elements that match the criteria,
+        only the first match will be returned. Use ``limit()`` to retrieve
+        the entire set.
+
+        If no match is found in the QueryList, the method will raise a
+        ``NotFound`` exception.
+
+        >>> site_list.get(id=None)
+        Traceback (most recent call last):
+          File "<stdin>", line 1, in <module>
+          File "querylist/querylist.py", line 55, in get
+        querylist.querylist.NotFound: Element with specified attributes not
+        found.
 
         """
         for x in self:
