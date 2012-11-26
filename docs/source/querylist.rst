@@ -110,8 +110,8 @@ replace the dot operator that one would normally use with a double underscore.
 ``meta__description="Cats"``, for example, would match against all objects in
 the QueryList where object.meta.description=="Cats."
 
-Similarly, ```meta__keywords__count=4``` would match against all objects in
-the QueryList where object.meta.keywords.count==4.
+Similarly, ``meta__keywords__count=4`` would match against all objects in the
+QueryList where object.meta.keywords.count==4.
 
 Comparators
 ^^^^^^^^^^^
