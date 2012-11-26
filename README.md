@@ -12,6 +12,9 @@ iteration and selection cruft.
 The package also provides BetterDict, a backwards-compatible wrapper for
 dictionaries that enables dot lookups and assignment for key values.
 
+Take a look at the [complete
+documentation](https://querylist.readthedocs.org/) for more information.
+
 ## Installation
 
 Querylist can be installed like any other python package:
@@ -56,6 +59,8 @@ Key values that conflict with normal dict attributes are accessible via a
     <built-in method items of BetterDict object at 0x10d3a7fb0>
     >>> bd._bd_.items
     True
+
+[More about BetterDicts >>](https://querylist.readthedocs.org/en/latest/betterdict.html)
 
 ### QueryLists
 
@@ -124,6 +129,8 @@ the following, which publishes all unpublished sites:
     >>> from site_api import Site
     >>> ql = QueryList(site_list, wrap=Site)
     >>> [x.publish() for x in ql.exclude(published=True)]
+
+[More about QueryLists >>](https://querylist.readthedocs.org/en/latest/querylist.html)
 
 ## Contributing
 
