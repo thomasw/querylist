@@ -125,8 +125,78 @@ would look like: ``title__iexact="cats"``.
 
 Querylist ships with a number of comparators:
 
-.. autoclass:: querylist.fieldlookup.FieldLookup
-    :members:
+**exact**
+
+Returns True if the attribute and the specified value are equal.
+
+**iexact**
+
+Converts both the attribute and the specified value to lowercase and returns
+True if the values are equal.
+
+Both the attribute and the specified value must be strings.
+
+**contains**
+
+Returns True if the specified value is ``in`` the attribute value. This
+works with strings and lists.
+
+**icontains**
+
+Converts both the attribute and the specified value to lowercase and returns
+True if the specified value is ``in`` the attribute value.
+
+**in**
+
+Returns True if the attribute is ``in`` the specified iterable
+
+This requires the specified value to be some iterable.
+
+**startswith**
+
+Returns true if the attribute value starts with the specified value.
+
+This requires the attribute value and specified value to be strings.
+
+**istartswith**
+
+Case insensitive startswith.
+
+**endswith**
+
+Returns true if the attribute value ends with the specified value.
+
+This requires the attribute value and specified value to be strings.
+
+**iendswith**
+
+Case insensitive endswith.
+
+**regex**
+
+Returns True if the attribute value matches the specified regular expression.
+
+**iregex**
+
+Case insensitive regex.
+
+**gt**
+
+Returns True if the attribute value is greater than the specified value.
+
+**gte**
+
+Returns True if the attribute value is greater than or equal to the specified
+value.
+
+**lt**
+
+Returns True if the attribute value is less than the specified valued.
+
+**lte**
+
+Returns True if the attribute value is less than or equal to the specified
+value.
 
 Aggregation
 -----------
