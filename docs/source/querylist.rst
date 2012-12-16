@@ -54,37 +54,37 @@ when the list was instantiated).
 >>> a = QueryList(my_data)
 >>> [item for item in a]
 
-Limiting and Excluding
-^^^^^^^^^^^^^^^^^^^^^^
+Filtering and Excluding
+^^^^^^^^^^^^^^^^^^^^^^^
 
-QueryLists provide two methods for limiting and excluding objects from a
-QueryList: ``limit()`` and ``exclude()``. ``limit()`` will return a QueryList
-containing all objects in the list that match the passed conditions, and
-``exclude()`` will return a QueryList containing the subset of the original
-QueryList that doesn't match the passed conditions.
+QueryLists provide two methods for filtering and excluding objects from a
+QueryList: ``filter()`` and ``exclude()``. ``filter()`` will return a
+QueryList containing all objects in the list that match the passed conditions,
+and ``exclude()`` will return a QueryList containing the subset of the
+original QueryList that doesn't match the passed conditions.
 
 Both methods accept keyword argument/value pairs, where the keyword is a field
 lookup and the value is the value to compare that field to. For example,
 ``id=4`` would match all objects with an id property equal to 4. See
 :ref:`field_lookups` for more information.
 
-.. automethod:: querylist.QueryList.limit
+.. automethod:: querylist.QueryList.filter
 .. automethod:: querylist.QueryList.exclude
 
 Chaining
 ^^^^^^^^
 
-QueryList methods that return QueryLists  (`limit()` and `exclude()`) can be
+QueryList methods that return QueryLists  (`filter()` and `exclude()`) can be
 chained together to form more complex queries:
 
->>> QueryList(sites).include(published=False).exclude(meta__keywords__contains="kittens")
+>>> QueryList(sites).filter(published=False).exclude(meta__keywords__contains="kittens")
 []
 
 Retrieving a single object
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In addition to providing methods for limiting or excluding objects, QueryLists
-provide a method for retrieving specific objects:
+In addition to providing methods for filtering or excluding objects,
+QueryLists provide a method for retrieving specific objects:
 
 .. automethod:: querylist.QueryList.get
 
@@ -218,8 +218,9 @@ Consider a user class that returns a list of sites::
             """Returns a list of the user's sites."""
             return Site(self.id).get_all_sites()
 
-If dictionaries are being used to represent sites, we can change the definition
-of ``get_sites()`` as follows without impacting any existing functionality::
+If dictionaries are being used to represent sites, we can change the
+definition of ``get_sites()`` as follows without impacting any existing
+functionality::
 
     def get_sites():
         """Returns a list of the user's sites."""

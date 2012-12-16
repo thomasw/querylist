@@ -68,11 +68,11 @@ class QueryList(list):
         {'url': 'http://site1.tld/', 'published': False, 'id': 1}
         >>> site_list.get(published=True, id__lt=3)
         {'url': 'http://site1.tld/', 'published': True, 'id': 2}
-        >>> site_list.limit(published=True).get(id__lt=3)
+        >>> site_list.filter(published=True).get(id__lt=3)
         {'url': 'http://site1.tld/', 'published': True, 'id': 2}
 
         If the QueryList contains multiple elements that match the criteria,
-        only the first match will be returned. Use ``limit()`` to retrieve
+        only the first match will be returned. Use ``filter()`` to retrieve
         the entire set.
 
         If no match is found in the QueryList, the method will raise a
@@ -120,27 +120,27 @@ class QueryList(list):
             data=(x for x in self if not self._check_element(kwargs, x)),
             wrapper=self._wrapper, wrap=False)
 
-    def limit(self, **kwargs):
+    def filter(self, **kwargs):
         """Generates a QueryList containing the subset of objects from this
         QueryList that match the provided set of field lookups.
 
         The following example returns the subset of a QueryList named
         ``site_list`` where published is equal to False:
 
-        >>> site_list.limit(published=True)
+        >>> site_list.filter(published=True)
         [{'url': 'http://site1.tld/',...}, {...}],
 
-        Similarly, in the next example, ``limit()`` returns the subset of
+        Similarly, in the next example, ``filter()`` returns the subset of
         objects where object.meta.keywords contains the string 'kittens' and
         where the id property is greater than 100.
 
-        >>> site_list.limit(meta__keywords__contains='kittens', id__gt=100)
+        >>> site_list.filter(meta__keywords__contains='kittens', id__gt=100)
         [{'url': 'http://site101.tld/',...}, {...}],
 
         If no objects match the provided field lookups, an empty QueryList
         is returned.
 
-        >>> site_list.limit(id__gte=1000, published=False)
+        >>> site_list.filter(id__gte=1000, published=False)
         []
 
         """

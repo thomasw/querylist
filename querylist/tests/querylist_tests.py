@@ -101,13 +101,13 @@ class QueryListExcludeMethodTests(QueryListMethodTests):
             self.ql.exclude(meta__description__icontains='cool site'))
 
 
-class QueryListLimitMethodTests(QueryListMethodTests):
-    """QueryList.limit()"""
+class QueryListFilterMethodTests(QueryListMethodTests):
+    """QueryList.filter()"""
     def test_returns_everything_if_it_is_passed_nothing(self):
-        self.assertEqual(self.ql.limit(), self.src_list)
+        self.assertEqual(self.ql.filter(), self.src_list)
 
     def test_returns_subset_of_matching_elements(self):
-        self.assertEqual(self.ql.limit(published=False), [self.src_list[2]])
+        self.assertEqual(self.ql.filter(published=False), [self.src_list[2]])
 
     def test_returns_an_empty_querylist_if_no_items_match(self):
-        self.assertFalse(self.ql.limit(id=1000))
+        self.assertFalse(self.ql.filter(id=1000))

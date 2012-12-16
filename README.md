@@ -102,12 +102,12 @@ QueryLists work just like lists:
     True
 
 They also let developers, exclude objects that don't match criteria via field
-lookups or limit the QueryList to only the objects that do match a provided
+lookups or filter the QueryList to only the objects that do match a provided
 criteria:
 
     >>> ql.exclude(published=True)
     [{'url': 'http://site3.tld/', 'meta': {'keywords': ['Mustard', 'kittens'], 'description': 'My cool site'}, 'id': 3, 'name': 'Site 3', 'published': False}]
-    >>> ql.limit(published=True).exclude(meta__keywords__contains='Catsup')
+    >>> ql.filter(published=True).exclude(meta__keywords__contains='Catsup')
     [{'url': 'http://site1.tld/', 'meta': {'keywords': ['Mustard', 'kittens'], 'description': 'My cool site'}, 'id': 1, 'name': 'Site 1', 'published': True}]
 
 And finally, they let developers retrieve specific objects with the get
