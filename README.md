@@ -119,7 +119,7 @@ And finally, they let developers retrieve specific objects with the get
 method:
 
     >>> ql.get(id=2)
-    {'url': 'http://site1.tld/', 'meta': {'keywords': ['Mustard', 'kittens'], 'description': 'My cool site'}, 'id': 1, 'name': 'Site 1', 'published': True}
+    {'url': 'http://site1.tld/', 'meta': {'keywords': ['Mustard', 'kittens'], 'description': 'My cool site'}, 'id': 2, 'name': 'Site 1', 'published': True}
 
 By default, QueryLists work exclusively with lists of dictionaries. This is
 achieved partly by converting the member dicts to BetterDicts on
