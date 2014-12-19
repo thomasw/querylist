@@ -20,6 +20,7 @@ class FieldLookup(object):
             'gte': FieldLookup.gte,
             'lt': FieldLookup.lt,
             'lte': FieldLookup.lte,
+            'call': FieldLookup.call
         }
 
     def __call__(self, instance, lookup, compare_value=None, compare=False):
@@ -170,6 +171,11 @@ class FieldLookup(object):
 
         """
         return value1 <= value2
+
+    @staticmethod
+    def call(value1, value2):
+        """Return output of callable value2 resulting from passing value1."""
+        return value2(value1)
 
 
 field_lookup = FieldLookup()
