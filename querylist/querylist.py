@@ -24,14 +24,31 @@ class QueryList(list):
     def __init__(self, data=None, wrapper=BetterDict, wrap=True):
         """Create a QueryList from an iterable and a wrapper object."""
         self._wrapper = wrapper
+        self._wrap = wrap
         self.src_data = data
         converted_data = data or []
 
         # Wrap our src_data with wrapper
-        if wrap:
+        if self._wrap:
             converted_data = self._convert_iterable(data) if data else []
 
         super(QueryList, self).__init__(converted_data)
+
+    def __add__(self, y):
+        """Return a new QueryList containing itself and the passed iterable.
+
+        Note that addition operations may result in QueryLists with mixed
+        wrappers. Consider
+
+        >>> a = QueryList(some_data)
+        >>> b = QueryList(some_other_data, wrap=False)
+        >>> c = a + b
+
+        The resulting QueryList `c` will contain a mixture of BetterDicts (
+        QueryList a's members) and dicts (QueryList b's members).
+
+        """
+        return QueryList(data=super(QueryList, self).__add__(y), wrap=False)
 
     @property
     def count(self):
