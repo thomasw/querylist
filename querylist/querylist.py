@@ -45,7 +45,8 @@ class QueryList(list):
         >>> c = a + b
 
         The resulting QueryList `c` will contain a mixture of BetterDicts (
-        QueryList a's members) and dicts (QueryList b's members).
+        QueryList a's members) and dicts (QueryList b's members) assuming both
+        `some_data` and `some_other_data` are lists of dictionaries.
 
         """
         return QueryList(data=super(QueryList, self).__add__(y), wrap=False)
