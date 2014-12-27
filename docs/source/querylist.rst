@@ -198,6 +198,12 @@ Returns True if the attribute value is less than the specified valued.
 Returns True if the attribute value is less than or equal to the specified
 value.
 
+**call**
+
+Invokes the specified value as a callable, passing it the attribute value. The
+result is returned. If the result is falsey, this test will fail. If the result
+is truthy it will pass.
+
 Aggregation
 -----------
 
