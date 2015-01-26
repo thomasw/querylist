@@ -169,3 +169,99 @@ class QueryList(list):
 
 class NotFound(Exception):
     pass
+
+
+class Condition(object):
+    def __init__(self, **kwargs):
+        self._condition_set = kwargs
+
+    def __str__(self):
+        return self.__unicode__()
+
+    def __unicode__(self):
+        condition_string = ''
+
+        for key, value in self._condition_set.iteritems():
+            condition_string += "%s=%s, " % (key, value)
+
+        return "<Condition: %s>" % condition_string.rstrip(', ')
+
+    def evaluate(self, instance):
+        for q, val in self._condition_set.iteritems():
+            if not field_lookup(instance, q, val, True):
+                return False
+
+        return True
+
+
+class Q(object):
+    def __init__(self, query=None, negated=False, operator='&', **kwargs):
+        self._query = []
+        self._negated = negated
+        self._operator = operator
+
+        if kwargs:
+            self._query.append(Condition(**kwargs))
+
+        if query and isinstance(query, Q):
+            self._query.append(query)
+
+        if query and not isinstance(query, Q):
+            self._query.extend(query)
+
+    def _apply_logical_operator(self, operator, other):
+        if self._query_length == 0:
+            return other
+
+        self._query = [self.__copy__(), other]
+        self._operator = operator
+        self._negated = False
+
+        return self
+
+    def __str__(self):
+        return self.__unicode__()
+
+    def __unicode__(self):
+        clauses = ''
+
+        for clause in self._query:
+            clauses += "%s %s " % (str(clause), self._operator)
+
+        return "%s(%s)" % (
+            '~' if self._negated else '',
+            clauses.rstrip('&| ')
+        )
+
+    def __copy__(self):
+        return Q(
+            query=self._query, negated=self._negated, operator=self._operator)
+
+    def __neg__(self):
+        self._negated = not self._negated
+        return self
+
+    def __invert__(self):
+        return self.__neg__()
+
+    def __and__(self, other):
+        return self._apply_logical_operator('&', other)
+
+    def __or__(self, other):
+        return self._apply_logical_operator('|', other)
+
+    @property
+    def _query_length(self):
+        return len(self._query)
+
+    def evaluate(self, instance):
+        for clause in self._query:
+            evaluation = clause.evaluate(instance)
+
+            if not evaluation and self._operator == '&':
+                return False
+
+            if evaluation and self._operator == '|':
+                return True
+
+        return True
