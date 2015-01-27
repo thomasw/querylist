@@ -1,5 +1,5 @@
 from betterdict import BetterDict
-from fieldlookup import field_lookup
+from fieldlookup import field_lookup, FieldLookupCollection
 
 
 class QueryList(list):
@@ -171,29 +171,6 @@ class NotFound(Exception):
     pass
 
 
-class Condition(object):
-    def __init__(self, **kwargs):
-        self._condition_set = kwargs
-
-    def __str__(self):
-        return self.__unicode__()
-
-    def __unicode__(self):
-        condition_string = ''
-
-        for key, value in self._condition_set.iteritems():
-            condition_string += "%s=%s, " % (key, value)
-
-        return "<Condition: %s>" % condition_string.rstrip(', ')
-
-    def evaluate(self, instance):
-        for q, val in self._condition_set.iteritems():
-            if not field_lookup(instance, q, val, True):
-                return False
-
-        return True
-
-
 class Q(object):
     def __init__(self, query=None, negated=False, operator='&', **kwargs):
         self._query = []
@@ -201,7 +178,7 @@ class Q(object):
         self._operator = operator
 
         if kwargs:
-            self._query.append(Condition(**kwargs))
+            self._query.append(FieldLookupCollection(**kwargs))
 
         if query and isinstance(query, Q):
             self._query.append(query)

@@ -178,4 +178,28 @@ class FieldLookup(object):
         return value2(value1)
 
 
+
+class FieldLookupCollection(object):
+    def __init__(self, **kwargs):
+        self._lookup_set = kwargs
+
+    def __str__(self):
+        return self.__unicode__()
+
+    def __unicode__(self):
+        lookup_string = ''
+
+        for key, value in self._lookup_set.iteritems():
+            lookup_string += "%s=%s, " % (key, value)
+
+        return "<Lookups: %s>" % lookup_string.rstrip(', ')
+
+    def evaluate(self, instance):
+        for q, val in self._lookup_set.iteritems():
+            if not field_lookup(instance, q, val, True):
+                return False
+
+        return True
+
+
 field_lookup = FieldLookup()
