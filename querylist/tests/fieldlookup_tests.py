@@ -1,7 +1,8 @@
 import unittest2
 
 from querylist import BetterDict
-from querylist.fieldlookup import FieldLookup, field_lookup
+from querylist.fieldlookup import (
+    FieldLookup, FieldLookupCollection, field_lookup)
 
 
 class FieldLookupTests(unittest2.TestCase):
@@ -19,6 +20,10 @@ class FieldLookupTests(unittest2.TestCase):
             'sauce': 'Mustard',
             'bleh': [1, 2, 3, 4]
         })
+        self.truthy_flc = FieldLookupCollection(
+            foo=1, bar__cat=True, sauce__exact="Mustard")
+        self.falsey_flc = FieldLookupCollection(
+            foo=1, bar__cat=True, sauce__exact="mustard")
 
 
 class FieldLookupParseLookupTests(FieldLookupTests):
@@ -67,3 +72,11 @@ class FieldLookupCallTests(FieldLookupTests):
             field_lookup(self.instance, 'sauce__iexact', 'mustard', True),
             True
         )
+
+
+class FieldLookUpCollectionEvaluation(FieldLookupTests):
+    def test_returns_true_if_all_lookups_match(self):
+        self.assertTrue(self.truthy_flc.evaluate(self.instance))
+
+    def test_returns_false_if_any_lookups_fail(self):
+        self.assertFalse(self.falsey_flc.evaluate(self.instance))

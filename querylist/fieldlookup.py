@@ -178,8 +178,16 @@ class FieldLookup(object):
         return value2(value1)
 
 
-
 class FieldLookupCollection(object):
+
+    """A collection of field lookup strings.
+
+    FieldLookupCollection(**kwargs) -> new FieldLookUpCollection
+
+    Field lookups should be specified as keyword arguments.
+
+    """
+
     def __init__(self, **kwargs):
         self._lookup_set = kwargs
 
@@ -195,6 +203,12 @@ class FieldLookupCollection(object):
         return "<Lookups: %s>" % lookup_string.rstrip(', ')
 
     def evaluate(self, instance):
+        """Evaluate the collection of lookups against the passed instance.
+
+        If all lookups return True, then evaluate will return True. If any are
+        False, it will return False.
+
+        """
         for q, val in self._lookup_set.iteritems():
             if not field_lookup(instance, q, val, True):
                 return False
