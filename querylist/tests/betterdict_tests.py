@@ -1,5 +1,11 @@
+from __future__ import absolute_import
+
+try:
+    from unittest2 import TestCase
+except ImportError:
+    from unittest import TestCase
+
 from copy import deepcopy
-import unittest2
 
 from querylist import BetterDict
 
@@ -24,7 +30,7 @@ SRC_DICT = {
 }
 
 
-class BetterDictTestCase(unittest2.TestCase):
+class BetterDictTestCase(TestCase):
     def setUp(self):
         self.src_dict = deepcopy(SRC_DICT)
         self.better_dict = BetterDict(self.src_dict)
