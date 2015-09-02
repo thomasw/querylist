@@ -1,9 +1,15 @@
-import unittest2
+from __future__ import absolute_import
+
+try:
+    from unittest2 import TestCase
+except ImportError:
+    from unittest import TestCase
+
 
 from querylist import BetterDict
 
 
-class BetterDictActsAsDict(unittest2.TestCase):
+class BetterDictActsAsDict(TestCase):
     """BetterDicts should act just like dictionaries"""
     def setUp(self):
         self.src_dict = {

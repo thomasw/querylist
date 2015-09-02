@@ -1,5 +1,9 @@
-from betterdict import BetterDict
-from fieldlookup import field_lookup
+from __future__ import absolute_import
+
+from six import iteritems
+
+from .betterdict import BetterDict
+from .fieldlookup import field_lookup
 
 
 class QueryList(list):
@@ -72,7 +76,7 @@ class QueryList(list):
         object.
 
         """
-        for q, val in lookup_strings.iteritems():
+        for q, val in iteritems(lookup_strings):
             if not field_lookup(instance, q, val, True):
                 return False
 

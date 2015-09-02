@@ -1,9 +1,14 @@
-import unittest2
+from __future__ import absolute_import
+
+try:
+    from unittest2 import TestCase
+except ImportError:
+    from unittest import TestCase
 
 from querylist.betterdict import BetterDictLookUp
 
 
-class BetterDictLookUpInstancesCan(unittest2.TestCase):
+class BetterDictLookUpInstancesCan(TestCase):
     def setUp(self):
         self.src_dict = {
             'foo': 1,
