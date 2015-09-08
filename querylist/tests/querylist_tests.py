@@ -1,14 +1,12 @@
-from __future__ import absolute_import
-
 try:
     from unittest2 import TestCase
 except ImportError:
     from unittest import TestCase
 
 from querylist import QueryList, BetterDict
-from querylist.querylist import NotFound
+from querylist.list import NotFound
 
-from .fixtures import SITE_LIST
+from querylist.tests.fixtures import SITE_LIST
 
 
 class QueryListInstantiationTests(TestCase):

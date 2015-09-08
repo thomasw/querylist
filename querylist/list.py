@@ -1,7 +1,5 @@
-from __future__ import absolute_import
-
-from .betterdict import BetterDict
-from .fieldlookup import field_lookup
+from querylist.betterdict import BetterDict
+from querylist.fieldlookup import field_lookup
 
 
 class QueryList(list):
