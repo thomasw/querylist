@@ -1,6 +1,10 @@
 Changelog
 =========
 
+**0.3.0**
+
+* Adds Python 3 support.
+
 **0.2.0**
 
 * Added a new field lookup called `call`. It uses the passed value as a callable
