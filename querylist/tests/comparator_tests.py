@@ -1,9 +1,6 @@
-try:
-    from unittest2 import TestCase
-except ImportError:
-    from unittest import TestCase
-
 from querylist.fieldlookup import FieldLookup
+
+from querylist.tests.base import TestCase
 
 fl = FieldLookup
 

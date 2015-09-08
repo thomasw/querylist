@@ -1,10 +1,6 @@
-try:
-    from unittest2 import TestCase
-except ImportError:
-    from unittest import TestCase
-
-
 from querylist import BetterDict
+
+from querylist.tests.base import TestCase
 
 
 class BetterDictActsAsDict(TestCase):

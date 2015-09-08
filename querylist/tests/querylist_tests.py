@@ -1,11 +1,7 @@
-try:
-    from unittest2 import TestCase
-except ImportError:
-    from unittest import TestCase
-
 from querylist import QueryList, BetterDict
 from querylist.list import NotFound
 
+from querylist.tests.base import TestCase
 from querylist.tests.fixtures import SITE_LIST
 
 

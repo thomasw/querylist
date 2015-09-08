@@ -1,11 +1,8 @@
-try:
-    from unittest2 import TestCase
-except ImportError:
-    from unittest import TestCase
-
 from copy import deepcopy
 
 from querylist import BetterDict
+
+from querylist.tests.base import TestCase
 
 SRC_DICT = {
     'foo': 1,
