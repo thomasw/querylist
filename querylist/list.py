@@ -1,4 +1,4 @@
-from querylist.betterdict import BetterDict
+from querylist.dict import BetterDict
 from querylist.fieldlookup import field_lookup
 
 

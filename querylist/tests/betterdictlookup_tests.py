@@ -3,7 +3,7 @@ try:
 except ImportError:
     from unittest import TestCase
 
-from querylist.betterdict import BetterDictLookUp
+from querylist.dict import BetterDictLookUp
 
 
 class BetterDictLookUpInstancesCan(TestCase):
