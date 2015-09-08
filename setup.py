@@ -4,8 +4,16 @@ from setuptools import setup, find_packages
 
 import querylist
 
-# If we're using Python 2.7 or higher, we don't need unittest2.
-unittest2_module = 'unittest2<1.2' if sys.version_info < (2, 7) else ''
+
+unittest2_module = ''
+
+if sys.version_info < (2, 7):
+    # spec causes python setup.py test to fail. This import fixes that for
+    # some reason.
+    import multiprocessing  # noqa
+
+    # If we're still on python 2.6, we need unittest2
+    unittest2_module = 'unittest2<1.2'
 
 
 setup(
