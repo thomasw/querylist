@@ -28,9 +28,6 @@ setup(
                 'also provides BetterDict, a dot lookup/assignment capable '
                 'wrapper for dicts that is 100% backwards compatible.',
     packages=find_packages(),
-    install_requires=[
-        'six>=1.9.0,<1.10',
-    ],
     tests_require=[
         'nose>=1.3.6,<1.4',
         'spec>=1.2.2,<1.3',
