@@ -4,11 +4,8 @@ import sys
 
 from setuptools import setup, find_packages
 
-unittest2_module = 'unittest2>=0.5.1,<0.6'
-
-# If we're using Python 3, we don't need unittest2.
-if sys.version_info > (3, 0):
-    unittest2_module = ''
+# If we're using Python 2.7 or higher, we don't need unittest2.
+unittest2_module = 'unittest2<1.2' if sys.version_info < (2, 7) else ''
 
 _version_re = re.compile(r'__version__\s+=\s+(.*)')
 
@@ -31,9 +28,9 @@ setup(
     tests_require=[
         'nose>=1.3.6,<1.4',
         'spec>=1.2.2,<1.3',
-        unittest2_module],
+        unittest2_module
+    ],
     classifiers=[
-        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Topic :: Software Development :: Libraries',

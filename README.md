@@ -140,7 +140,8 @@ the following, which publishes all unpublished sites:
 ## Contributing
 
 1. Fork the repo and then clone it locally.
-2. Install the development requirements: `pip install -r requirements.txt`
+2. Install the development requirements: `pip install -r requirements.txt` (
+    use `requirements26.txt` for python 2.6)
 3. Use [testtube](https://github.com/thomasw/testtube/)'s `stir` command
 (installed via #2) to monitor the project directory for changes and
 automatically run the test suite.
