@@ -1,7 +1,7 @@
 from querylist import BetterDict
 from querylist.fieldlookup import FieldLookup, field_lookup
 
-from querylist.tests.base import TestCase
+from tests.base import TestCase
 
 
 class FieldLookupTests(TestCase):

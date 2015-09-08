@@ -1,6 +1,6 @@
 from querylist.fieldlookup import FieldLookup
 
-from querylist.tests.base import TestCase
+from tests.base import TestCase
 
 fl = FieldLookup
 

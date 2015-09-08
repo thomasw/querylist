@@ -2,7 +2,7 @@ from copy import deepcopy
 
 from querylist import BetterDict
 
-from querylist.tests.base import TestCase
+from tests.base import TestCase
 
 SRC_DICT = {
     'foo': 1,

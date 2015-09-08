@@ -1,8 +1,8 @@
 from querylist import QueryList, BetterDict
 from querylist.list import NotFound
 
-from querylist.tests.base import TestCase
-from querylist.tests.fixtures import SITE_LIST
+from tests.base import TestCase
+from tests.fixtures import SITE_LIST
 
 
 class QueryListInstantiationTests(TestCase):
