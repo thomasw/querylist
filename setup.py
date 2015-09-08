@@ -1,24 +1,19 @@
-import ast
-import re
 import sys
 
 from setuptools import setup, find_packages
 
+import querylist
+
 # If we're using Python 2.7 or higher, we don't need unittest2.
 unittest2_module = 'unittest2<1.2' if sys.version_info < (2, 7) else ''
 
-_version_re = re.compile(r'__version__\s+=\s+(.*)')
-
-with open('querylist/__init__.py', 'rb') as f:
-    version = str(ast.literal_eval(_version_re.search(
-        f.read().decode('utf-8')).group(1)))
 
 setup(
     name='querylist',
-    version=version,
+    version=querylist.__version__,
     url='https://github.com/thomasw/querylist',
     download_url='https://github.com/thomasw/querylist/downloads',
-    author='Thomas Welfley',
+    author=querylist.__author__,
     author_email='thomas.welfley+querylist@gmail.com',
     description='This package provides a QueryList class with django '
                 'ORM-esque filtering, excluding, and getting for lists. It '
