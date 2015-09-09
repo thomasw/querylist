@@ -1,11 +1,11 @@
-import unittest2
-
-from fixtures import SITE_LIST
 from querylist import QueryList, BetterDict
-from querylist.querylist import NotFound
+from querylist.list import NotFound
+
+from tests.base import TestCase
+from tests.fixtures import SITE_LIST
 
 
-class QueryListInstantiationTests(unittest2.TestCase):
+class QueryListInstantiationTests(TestCase):
     """QueryList instantiation"""
     def test_sets_wrapper_attribute_to_BetterDict_by_default(self):
         self.assertEqual(QueryList()._wrapper, BetterDict)
@@ -23,7 +23,7 @@ class QueryListInstantiationTests(unittest2.TestCase):
         self.assertEqual(QueryList([1, 2, 3], str, False), [1, 2, 3])
 
 
-class QueryListConverIterableTests(unittest2.TestCase):
+class QueryListConverIterableTests(TestCase):
     """QueryList._convert_iterable()"""
     def setUp(self):
         self.iterable = [{'foo': 1}, {'bar': 2}]
@@ -38,7 +38,7 @@ class QueryListConverIterableTests(unittest2.TestCase):
         self.assertEqual(ql._convert_iterable(self.iterable), self.iterable)
 
 
-class QueryListCheckElementTests(unittest2.TestCase):
+class QueryListCheckElementTests(TestCase):
     "QueryList._check_element()"
     def setUp(self):
         self.ql = QueryList()
@@ -54,7 +54,7 @@ class QueryListCheckElementTests(unittest2.TestCase):
         self.assertTrue(self.ql._check_element({'id': 1, 'dog': 4}, self.bd))
 
 
-class QueryListMethodTests(unittest2.TestCase):
+class QueryListMethodTests(TestCase):
     def setUp(self):
         self.src_list = SITE_LIST
         self.ql = QueryList(SITE_LIST)

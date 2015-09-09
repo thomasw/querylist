@@ -1,0 +1,7 @@
+include *.md
+include requirements*.txt
+include LICENSE
+include CONTRIBUTORS
+include setup.cfg
+
+recursive-include docs *

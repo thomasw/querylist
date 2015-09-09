@@ -1,9 +1,9 @@
-import unittest2
-
 from querylist import BetterDict, QueryList
 
+from tests.base import TestCase
 
-class QueryListAddition(unittest2.TestCase):
+
+class QueryListAddition(TestCase):
     """QueryList Addition"""
     def setUp(self):
         self.src_list1 = [{'foo': 1}, {'foo': 2}, {'foo': 3}]
@@ -39,7 +39,7 @@ class QueryListAddition(unittest2.TestCase):
             [{'foo': 2}, {'foo': 4}, {'foo': 6}])
 
 
-class QueryListActsAsList(unittest2.TestCase):
+class QueryListActsAsList(TestCase):
     """QueryLists should act just like lists if the wrapper is compatible
     with the src data elements"""
     def setUp(self):

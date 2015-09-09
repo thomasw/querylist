@@ -1,11 +1,11 @@
-import unittest2
-
 from querylist.fieldlookup import FieldLookup
+
+from tests.base import TestCase
 
 fl = FieldLookup
 
 
-class ExactTests(unittest2.TestCase):
+class ExactTests(TestCase):
     """FieldLookup.exact()"""
     def test_returns_true_if_passed_values_match_exactly(self):
         self.assertTrue(fl.exact(1, 1))
@@ -14,7 +14,7 @@ class ExactTests(unittest2.TestCase):
         self.assertFalse(fl.exact(1, 2))
 
 
-class IExactTests(unittest2.TestCase):
+class IExactTests(TestCase):
     """FieldLookup.iexact()"""
     def test_returns_true_if_case_insensitive_values_match(self):
         self.assertTrue(fl.iexact('Yay', 'yay'))
@@ -23,7 +23,7 @@ class IExactTests(unittest2.TestCase):
         self.assertFalse(fl.iexact('yay', 'foo'))
 
 
-class ContainsTests(unittest2.TestCase):
+class ContainsTests(TestCase):
     """FieldLookup.contains()"""
     def test_returns_true_if_first_value_contains_second_value(self):
         self.assertTrue(fl.contains('go team', 'team'))
@@ -35,7 +35,7 @@ class ContainsTests(unittest2.TestCase):
         self.assertFalse(fl.contains([1, 2], 3))
 
 
-class IContainsTests(unittest2.TestCase):
+class IContainsTests(TestCase):
     """FieldLookup.icontains()"""
     def test_returns_true_if_first_value_contains_second_with_any_case(self):
         self.assertTrue(fl.icontains('FLOrida', 'flo'))
@@ -44,7 +44,7 @@ class IContainsTests(unittest2.TestCase):
         self.assertFalse(fl.icontains('Florida', 'Cal'))
 
 
-class InTests(unittest2.TestCase):
+class InTests(TestCase):
     """FieldLookup.in()"""
     def test_returns_true_if_first_value_is_in_second_value(self):
         self.assertTrue(fl.isin(1, [1, 2]))
@@ -53,7 +53,7 @@ class InTests(unittest2.TestCase):
         self.assertFalse(fl.isin(4, [1, 2]))
 
 
-class StartsWithTests(unittest2.TestCase):
+class StartsWithTests(TestCase):
     """FieldLookup.startswith()"""
     def test_returns_true_if_first_value_starts_with_second_value(self):
         self.assertTrue(fl.startswith('kittens', 'kitten'))
@@ -62,7 +62,7 @@ class StartsWithTests(unittest2.TestCase):
         self.assertFalse(fl.startswith('kittens', 'do'))
 
 
-class IStartsWithTests(unittest2.TestCase):
+class IStartsWithTests(TestCase):
     """FieldLookup.istartswith()"""
     def test_lowercase_vals_and_return_true_if_first_starts_with_second(self):
         self.assertTrue(fl.istartswith('Kittens', 'kitteN'))
@@ -71,7 +71,7 @@ class IStartsWithTests(unittest2.TestCase):
         self.assertFalse(fl.istartswith('Kittens', 'DOG'))
 
 
-class EndsWithTests(unittest2.TestCase):
+class EndsWithTests(TestCase):
     """FieldLookup.endswith()"""
     def test_returns_true_if_first_value_ends_with_second_value(self):
         self.assertTrue(fl.endswith('kittens', 'tens'))
@@ -80,7 +80,7 @@ class EndsWithTests(unittest2.TestCase):
         self.assertFalse(fl.endswith('kittens', 'do'))
 
 
-class IEndsWithTests(unittest2.TestCase):
+class IEndsWithTests(TestCase):
     """FieldLookup.iendswith()"""
     def test_lowercase_vals_and_return_true_if_first_ends_with_second(self):
         self.assertTrue(fl.iendswith('Kittens', 'teNs'))
@@ -89,7 +89,7 @@ class IEndsWithTests(unittest2.TestCase):
         self.assertFalse(fl.iendswith('Kittens', 'DOG'))
 
 
-class RegexTests(unittest2.TestCase):
+class RegexTests(TestCase):
     """FieldLookup.regex()"""
     def test_returns_true_if_first_value_matches_regex(self):
         self.assertTrue(fl.regex('foo', r'\w*'))
@@ -98,7 +98,7 @@ class RegexTests(unittest2.TestCase):
         self.assertFalse(fl.regex('foo', r'\w*BOOP'))
 
 
-class IRegexWithTests(unittest2.TestCase):
+class IRegexWithTests(TestCase):
     """FieldLookup.iregex()"""
     def test_returns_true_if_first_value_matches_iregex(self):
         self.assertTrue(fl.iregex('foo', r'[A-Z]*'))
@@ -107,7 +107,7 @@ class IRegexWithTests(unittest2.TestCase):
         self.assertFalse(fl.iregex('foo', r'[A-Z]*BOOP'))
 
 
-class GTTests(unittest2.TestCase):
+class GTTests(TestCase):
     """FieldLookup.gt()"""
     def test_returns_true_if_first_value_is_greater_than_second(self):
         self.assertTrue(fl.gt(2, 1))
@@ -119,7 +119,7 @@ class GTTests(unittest2.TestCase):
         self.assertFalse(fl.gt(2, 2))
 
 
-class GTETests(unittest2.TestCase):
+class GTETests(TestCase):
     """FieldLookup.gte()"""
     def test_returns_true_if_first_value_is_greater_than_second(self):
         self.assertTrue(fl.gte(2, 1))
@@ -131,7 +131,7 @@ class GTETests(unittest2.TestCase):
         self.assertFalse(fl.gte(1, 2))
 
 
-class LTTests(unittest2.TestCase):
+class LTTests(TestCase):
     """FieldLookup.lt()"""
     def test_returns_true_if_first_value_is_less_than_second(self):
         self.assertTrue(fl.lt(1, 2))
@@ -143,7 +143,7 @@ class LTTests(unittest2.TestCase):
         self.assertFalse(fl.lt(2, 2))
 
 
-class LTETests(unittest2.TestCase):
+class LTETests(TestCase):
     """FieldLookup.lte()"""
     def test_returns_true_if_first_value_is_less_than_second(self):
         self.assertTrue(fl.lte(1, 2))
