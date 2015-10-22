@@ -108,7 +108,8 @@ class QueryList(list):
             if self._check_element(kwargs, x):
                 return x
 
-        raise NotFound("Element with specified attributes not found.")
+        raise QueryList.NotFound(
+            "Element with specified attributes not found.")
 
     def exclude(self, **kwargs):
         """Generates a QueryList containing the subset of objects from
@@ -166,6 +167,5 @@ class QueryList(list):
             data=(x for x in self if self._check_element(kwargs, x)),
             wrapper=self._wrapper, wrap=False)
 
-
-class NotFound(Exception):
-    pass
+    class NotFound(Exception):
+        pass
