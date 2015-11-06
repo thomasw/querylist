@@ -99,16 +99,18 @@ class QueryList(list):
         >>> site_list.get(id=None)
         Traceback (most recent call last):
           File "<stdin>", line 1, in <module>
-          File "querylist/querylist.py", line 55, in get
-        querylist.querylist.NotFound: Element with specified attributes not
-        found.
+          File "querylist/list.py", line 113, in get
+            "Element not found with attributes: %s" % kv_str)
+        querylist.list.NotFound: Element not found with attributes: id=None
 
         """
         for x in self:
             if self._check_element(kwargs, x):
                 return x
 
-        raise NotFound("Element with specified attributes not found.")
+        kv_str = self._stringify_kwargs(kwargs)
+        raise QueryList.NotFound(
+            "Element not found with attributes: %s" % kv_str)
 
     def exclude(self, **kwargs):
         """Generates a QueryList containing the subset of objects from
@@ -166,6 +168,8 @@ class QueryList(list):
             data=(x for x in self if self._check_element(kwargs, x)),
             wrapper=self._wrapper, wrap=False)
 
+    def _stringify_kwargs(self, kwargs):
+        return ', '.join('%s=%s' % kv for kv in kwargs.items())
 
-class NotFound(Exception):
-    pass
+    class NotFound(Exception):
+        pass

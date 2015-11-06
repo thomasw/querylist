@@ -1,5 +1,4 @@
 from querylist import QueryList, BetterDict
-from querylist.list import NotFound
 
 from tests.base import TestCase
 from tests.fixtures import SITE_LIST
@@ -75,7 +74,7 @@ class QueryListGetMethodTests(QueryListMethodTests):
         self.assertEqual(self.ql.get(), self.src_list[0])
 
     def test_raises_an_exception_if_no_matches_are_found(self):
-        self.assertRaises(NotFound, self.ql.get, url='github.com')
+        self.assertRaises(QueryList.NotFound, self.ql.get, url='github.com')
 
     def test_works_correctly_with_multiple_lookups(self):
         self.assertEqual(
