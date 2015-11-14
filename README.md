@@ -1,7 +1,7 @@
 # querylist
 
-[![Build Status](https://travis-ci.org/thomasw/querylist.png)](https://travis-ci.org/thomasw/querylist)
-[![Coverage Status](https://coveralls.io/repos/thomasw/querylist/badge.png)](https://coveralls.io/r/thomasw/querylist)
+[![Build Status](https://img.shields.io/travis/thomasw/querylist.svg)](https://travis-ci.org/thomasw/querylist)
+[![Coverage Status](https://img.shields.io/coveralls/thomasw/querylist.svg)](https://coveralls.io/r/thomasw/querylist)
 [![Latest Version](https://img.shields.io/pypi/v/querylist.svg)](https://pypi.python.org/pypi/querylist/)
 [![Downloads](https://img.shields.io/pypi/dm/querylist.svg)](https://pypi.python.org/pypi/querylist/)
 
