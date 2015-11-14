@@ -5,11 +5,12 @@ python:
     - "2.7"
     - "3.3"
     - "3.4"
+    - "3.5"
     - "pypy"
 install:
     - if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then pip install -r requirements26.txt; fi
     - if [[ $TRAVIS_PYTHON_VERSION != '2.6' ]]; then pip install -r requirements.txt; fi
 script:
-    - python setup.py nosetests
+    - nosetests
 after_success:
-    coveralls
+    - coveralls
