@@ -1,6 +1,18 @@
 Changelog
 =========
 
+**0.4.0**
+
+* Fixed an issue building wheels caused by an empty string as a requirement in
+  setup.py.
+* Improved `querylist.list.NotFound` exception output.
+* Moved `querylist.list.NotFound` so that it is automatically imported and
+  available for exception handling when `QueryList` is imported:
+
+  >>> from querylist import QueryList
+  >>> QueryList.NotFound
+  <class 'querylist.list.NotFound'>
+
 **0.3.0**
 
 * Adds Python 3 support.
