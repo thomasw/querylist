@@ -26,7 +26,7 @@ Querylist can be installed like any other python package:
 
     > pip install querylist
 
-Querylist is tested against Python 2.6, 2.7, 3.3, 3.4, and pypy.
+Querylist is tested against Python 3.6+ and pypy.
 
 ## Usage
 
