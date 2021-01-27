@@ -10,14 +10,6 @@ tests_require = [
     'spec>=1.2.2,<1.3',
 ]
 
-if sys.version_info < (2, 7):
-    # spec causes python setup.py test to fail. This import fixes that for
-    # some reason.
-    import multiprocessing  # noqa
-
-    # If we're still on python 2.6, we need unittest2
-    tests_require.append('unittest2<1.2')
-
 setup(
     name='querylist',
     version=querylist.__version__,
