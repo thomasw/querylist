@@ -20,6 +20,7 @@ setup(
                 'wrapper for dicts that is 100% backwards compatible.',
     long_description=long_description,
     long_description_content_type='text/markdown',
+    license='MIT',
     packages=find_packages(),
     tests_require=['nose>=1.3.7,<1.4', 'spec>=1.4.1,<1.5'],
     classifiers=[
