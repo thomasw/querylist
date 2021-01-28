@@ -1,8 +1,11 @@
-import sys
+from pathlib import Path
 
 from setuptools import setup, find_packages
 
 import querylist
+
+with open(Path(__file__).absolute().parent / 'README.md', encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
     name='querylist',
@@ -15,6 +18,8 @@ setup(
                 'ORM-esque filtering, excluding, and getting for lists. It '
                 'also provides BetterDict, a dot lookup/assignment capable '
                 'wrapper for dicts that is 100% backwards compatible.',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     packages=find_packages(),
     tests_require=['nose>=1.3.7,<1.4', 'spec>=1.4.1,<1.5'],
     classifiers=[
