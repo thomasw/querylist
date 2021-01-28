@@ -18,9 +18,16 @@ setup(
     packages=find_packages(),
     tests_require=['nose>=1.3.7,<1.4', 'spec>=1.4.1,<1.5'],
     classifiers=[
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Topic :: Software Development :: Libraries',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: Implementation :: PyPy'
     ],
     test_suite='nose.collector',
 )
