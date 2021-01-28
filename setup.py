@@ -4,20 +4,6 @@ from setuptools import setup, find_packages
 
 import querylist
 
-
-tests_require = [
-    'nose>=1.3.6,<1.4',
-    'spec>=1.2.2,<1.3',
-]
-
-if sys.version_info < (2, 7):
-    # spec causes python setup.py test to fail. This import fixes that for
-    # some reason.
-    import multiprocessing  # noqa
-
-    # If we're still on python 2.6, we need unittest2
-    tests_require.append('unittest2<1.2')
-
 setup(
     name='querylist',
     version=querylist.__version__,
@@ -30,7 +16,7 @@ setup(
                 'also provides BetterDict, a dot lookup/assignment capable '
                 'wrapper for dicts that is 100% backwards compatible.',
     packages=find_packages(),
-    tests_require=tests_require,
+    tests_require=['nose>=1.3.7,<1.4', 'spec>=1.4.1,<1.5'],
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
