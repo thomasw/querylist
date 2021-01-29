@@ -1,4 +1,0 @@
-# These requirements are specifically needed for python 2.6
-unittest2==1.1.0
-
--r requirements.txt

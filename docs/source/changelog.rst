@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**0.5.0**
+
+* Dropped support for Python 2
+* Dropped support for all Python 3 versions below Python 3.6.
+* Dropped support for PyPy based on Python 2.7.
+
 **0.4.0**
 
 * Fixed an issue building wheels caused by an empty string as a requirement in
