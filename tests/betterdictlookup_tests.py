@@ -1,6 +1,6 @@
-from querylist.dict import BetterDictLookUp
+from unittest import TestCase
 
-from tests.base import TestCase
+from querylist.dict import BetterDictLookUp
 
 
 class BetterDictLookUpInstancesCan(TestCase):

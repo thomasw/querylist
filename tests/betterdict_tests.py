@@ -1,8 +1,7 @@
 from copy import deepcopy
+from unittest import TestCase
 
 from querylist import BetterDict
-
-from tests.base import TestCase
 
 SRC_DICT = {
     'foo': 1,

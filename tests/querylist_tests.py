@@ -1,6 +1,6 @@
-from querylist import QueryList, BetterDict
+from unittest import TestCase
 
-from tests.base import TestCase
+from querylist import BetterDict, QueryList
 from tests.fixtures import SITE_LIST
 
 
