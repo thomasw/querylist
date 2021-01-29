@@ -1,6 +1,6 @@
-from querylist import BetterDict, QueryList
+from unittest import TestCase
 
-from tests.base import TestCase
+from querylist import BetterDict, QueryList
 
 
 class QueryListAddition(TestCase):
