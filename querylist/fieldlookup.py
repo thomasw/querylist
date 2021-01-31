@@ -5,22 +5,22 @@ class FieldLookup(object):
     def __init__(self):
         self.default_comparator = FieldLookup.exact
         self.comparators = {
-            'exact': FieldLookup.exact,
-            'iexact': FieldLookup.iexact,
-            'contains': FieldLookup.contains,
-            'icontains': FieldLookup.icontains,
-            'in': FieldLookup.isin,
-            'startswith': FieldLookup.startswith,
-            'istartswith': FieldLookup.istartswith,
-            'endswith': FieldLookup.endswith,
-            'iendswith': FieldLookup.iendswith,
-            'regex': FieldLookup.regex,
-            'iregex': FieldLookup.iregex,
-            'gt': FieldLookup.gt,
-            'gte': FieldLookup.gte,
-            'lt': FieldLookup.lt,
-            'lte': FieldLookup.lte,
-            'call': FieldLookup.call
+            "exact": FieldLookup.exact,
+            "iexact": FieldLookup.iexact,
+            "contains": FieldLookup.contains,
+            "icontains": FieldLookup.icontains,
+            "in": FieldLookup.isin,
+            "startswith": FieldLookup.startswith,
+            "istartswith": FieldLookup.istartswith,
+            "endswith": FieldLookup.endswith,
+            "iendswith": FieldLookup.iendswith,
+            "regex": FieldLookup.regex,
+            "iregex": FieldLookup.iregex,
+            "gt": FieldLookup.gt,
+            "gte": FieldLookup.gte,
+            "lt": FieldLookup.lt,
+            "lte": FieldLookup.lte,
+            "call": FieldLookup.call,
         }
 
     def __call__(self, instance, lookup, compare_value=None, compare=False):
@@ -43,7 +43,7 @@ class FieldLookup(object):
 
     def _parse_lookup_string(self, lookup_chain):
         """Convert a lookup string to a (lookup_chain, comparator) tuple."""
-        lookup_chain = lookup_chain.split('__')
+        lookup_chain = lookup_chain.split("__")
         comparator = self.default_comparator
 
         # Only look for a lookup method if the lookup chain is larger than 1

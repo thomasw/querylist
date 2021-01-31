@@ -5,9 +5,10 @@ from querylist import BetterDict, QueryList
 
 class QueryListAddition(TestCase):
     """QueryList Addition"""
+
     def setUp(self):
-        self.src_list1 = [{'foo': 1}, {'foo': 2}, {'foo': 3}]
-        self.src_list2 = [{'foo': 4}, {'foo': 5}, {'foo': 6}]
+        self.src_list1 = [{"foo": 1}, {"foo": 2}, {"foo": 3}]
+        self.src_list2 = [{"foo": 4}, {"foo": 5}, {"foo": 6}]
         self.ql1 = QueryList(self.src_list1)
         self.ql2 = QueryList(self.src_list2, wrap=False)
 
@@ -36,14 +37,16 @@ class QueryListAddition(TestCase):
     def test_doesnt_break_filtering_capabilities(self):
         self.assertEqual(
             self.all_wrapped.filter(foo__call=lambda x: x % 2 == 0),
-            [{'foo': 2}, {'foo': 4}, {'foo': 6}])
+            [{"foo": 2}, {"foo": 4}, {"foo": 6}],
+        )
 
 
 class QueryListActsAsList(TestCase):
     """QueryLists should act just like lists if the wrapper is compatible
     with the src data elements"""
+
     def setUp(self):
-        self.src_list = [{'foo': 1}, {'foo': 2}, {'foo': 3}]
+        self.src_list = [{"foo": 1}, {"foo": 2}, {"foo": 3}]
         self.query_list = QueryList(self.src_list)
 
     def test_QueryList_items_are_equal_to_its_source_lists_items(self):

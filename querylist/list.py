@@ -21,6 +21,7 @@ class QueryList(list):
       are already compatible with QueryList.
 
     """
+
     def __init__(self, data=None, wrapper=BetterDict, wrap=True):
         """Create a QueryList from an iterable and a wrapper object."""
         self._wrapper = wrapper
@@ -109,8 +110,7 @@ class QueryList(list):
                 return x
 
         kv_str = self._stringify_kwargs(kwargs)
-        raise QueryList.NotFound(
-            "Element not found with attributes: %s" % kv_str)
+        raise QueryList.NotFound("Element not found with attributes: %s" % kv_str)
 
     def exclude(self, **kwargs):
         """Generates a QueryList containing the subset of objects from
@@ -138,7 +138,9 @@ class QueryList(list):
         """
         return QueryList(
             data=(x for x in self if not self._check_element(kwargs, x)),
-            wrapper=self._wrapper, wrap=False)
+            wrapper=self._wrapper,
+            wrap=False,
+        )
 
     def filter(self, **kwargs):
         """Generates a QueryList containing the subset of objects from this
@@ -166,10 +168,12 @@ class QueryList(list):
         """
         return QueryList(
             data=(x for x in self if self._check_element(kwargs, x)),
-            wrapper=self._wrapper, wrap=False)
+            wrapper=self._wrapper,
+            wrap=False,
+        )
 
     def _stringify_kwargs(self, kwargs):
-        return ', '.join('%s=%s' % kv for kv in kwargs.items())
+        return ", ".join("%s=%s" % kv for kv in kwargs.items())
 
     class NotFound(Exception):
         pass

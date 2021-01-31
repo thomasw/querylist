@@ -26,7 +26,7 @@ class BetterDict(dict):
     @property
     def _bd_(self):
         """Property that allows dot lookups of otherwise hidden attributes."""
-        if not getattr(self, '__bd__', False):
+        if not getattr(self, "__bd__", False):
             self.__bd = BetterDictLookUp(self)
 
         return self.__bd
@@ -36,6 +36,7 @@ class BetterDictLookUp(object):
     """Allows dot lookup and assignment of a provided dictionaries keys.
 
     This class is not backwards compatible with dictionaries."""
+
     def __init__(self, lookup_dict):
         self._lookup_dict = lookup_dict
 
@@ -46,7 +47,7 @@ class BetterDictLookUp(object):
             raise AttributeError
 
     def __setattr__(self, attr, value):
-        if attr != '_lookup_dict':
+        if attr != "_lookup_dict":
             self._lookup_dict[attr] = value
 
         return super(BetterDictLookUp, self).__setattr__(attr, value)
