@@ -9,6 +9,6 @@ testtube==1.0.0
 
 # Documentation requirements.
 Pygments==1.5
-Jinja2==2.6
+Jinja2==2.11.3
 docutils==0.9.1
 Sphinx==1.1.3
